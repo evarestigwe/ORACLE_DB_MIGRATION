@@ -1,0 +1,6 @@
+[source]
+source_db ansible_host=<source_ip> ansible_user=<source_user>
+
+[target]
+dev_target ansible_host=<dev_ip> ansible_user=<dev_user>
+qa_target ansible_host=<qa_ip> ansible_user=<qa_user>

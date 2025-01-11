@@ -1,0 +1,21 @@
+---
+- name: Create import directory
+  file:
+    path: "{{ import_dir }}"
+    state: directory
+
+- name: Copy dump file to target
+  copy:
+    src: "{{ export_dir }}/{{ source_db_name }}.dmp"
+    dest: "{{ import_dir }}/{{ source_db_name }}.dmp"
+
+- name: Import database into target
+  shell: |
+    impdp {{ db_user }}/{{ db_password }}@{{ item }} full=Y directory=DATA_PUMP_DIR dumpfile={{ source_db_name }}.dmp logfile=import_{{ item }}.log
+  loop: "{{ target_dbs }}"
+  args:
+    chdir: "{{ import_dir }}"
+
+- name: Debug import results
+  debug:
+    msg: "Import completed for {{ item }}"

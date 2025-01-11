@@ -1,0 +1,8 @@
+oracle_home: "/u01/app/oracle/product/19c/dbhome_1"
+export_dir: "/backup/export"
+import_dir: "/backup/import"
+db_user: "system"
+db_password: "<password>"
+source_db_name: "HEMPPRD"
+dev_db_name: "HEMPDEV2"
+qa_db_name: "HEMPQA2"

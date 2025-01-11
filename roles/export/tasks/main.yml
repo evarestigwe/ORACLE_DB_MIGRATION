@@ -1,0 +1,15 @@
+---
+- name: Create export directory
+  file:
+    path: "{{ export_dir }}"
+    state: directory
+
+- name: Export database
+  shell: |
+    expdp {{ db_user }}/{{ db_password }}@{{ source_db_name }} full=Y directory=DATA_PUMP_DIR dumpfile={{ source_db_name }}.dmp logfile=export_{{ source_db_name }}.log
+  args:
+    chdir: "{{ export_dir }}"
+
+- name: Debug export results
+  debug:
+    msg: "Export completed for {{ source_db_name }}"
